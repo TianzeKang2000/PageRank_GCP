@@ -53,7 +53,6 @@ Compile the Scala Code:
 
 Use SBT (Scala Build Tool) to compile your Scala code. Create a build.sbt file with the following content:
 scala
-Copy code
 name := "PageRank"
 
 version := "0.1"
@@ -78,8 +77,7 @@ gsutil cp target/scala-2.12/pagerank_2.12-0.1.jar gs://your-bucket/
 Step 4: Submit the Spark Job
 Submit the Job to Dataproc:
 Use the following command to submit the job to your Dataproc cluster:
-sh
-Copy code
+
 gcloud dataproc jobs submit spark --cluster your-cluster-name \
   --class PageRank --jars gs://your-bucket/pagerank_2.12-0.1.jar \
   -- gs://your-bucket/Sample_Graph_Data.csv gs://your-bucket/pagerank-results

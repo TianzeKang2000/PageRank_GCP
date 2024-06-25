@@ -1,3 +1,19 @@
+PageRank + pyspark + GCP
+
+step 1: Set up PySpark on GCP
+Create a GCP Account: Ensure you have a GCP account and necessary permissions.
+Set Up a Dataproc Cluster: Use Google Cloud Dataproc to create a managed Spark and Hadoop cluster.
+Create a Cluster: Go to the Dataproc section in GCP Console, create a new cluster, and configure it.
+Specify PySpark: Ensure the cluster supports PySpark.
+
+step 2: Implement PageRank using PySpark
+Load Data: Load the graph data into a DataFrame.
+Initialize PageRank: Initialize ranks
+Iterative Computation: Implement the iterative PageRank update formula.
+Save Results
+
+PageRank + Scala + GCP
+
 Step 1: Set Up PySpark on GCP
 Create a GCP Account: If you don't have one already, create a GCP account.
 Create a Dataproc Cluster:

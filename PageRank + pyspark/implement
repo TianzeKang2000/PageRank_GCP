@@ -1,0 +1,55 @@
+ Prepare Your Scala Code for PageRank
+Set Up sbt:
+
+Ensure you have sbt installed on your local machine. If not, you can install it by following the instructions here.
+Create a New sbt Project:
+
+Create a new directory for your project and navigate into it.
+sh
+mkdir pagerank-scala
+cd pagerank-scala
+Initialize a new sbt project:
+sh
+sbt new sbt/scala-seed.g8
+Follow the prompts to set up your project.
+Edit build.sbt:
+
+Add the following dependencies to your build.sbt file:
+scala
+libraryDependencies += "org.apache.spark" %% "spark-core" % "3.1.2"
+libraryDependencies += "org.apache.spark" %% "spark-graphx" % "3.1.2"
+Write the PageRank Code:
+
+Create a new Scala file (e.g., PageRank.scala) in the src/main/scala directory with the following code:
+scala
+import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.graphx._
+
+object PageRank {
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("PageRank").setMaster("local")
+    val sc = new SparkContext(conf)
+
+    // Load the graph from an edge list file
+    val graph = GraphLoader.edgeListFile(sc, "gs://your-bucket/path/to/edges.txt")
+
+    // Run PageRank
+    val ranks = graph.pageRank(0.0001).vertices
+
+    // Save the ranks
+    ranks.saveAsTextFile("gs://your-bucket/path/to/output")
+
+    sc.stop()
+  }
+}
+6. Run Your Scala Code on Dataproc
+Package Your Application:
+
+In the root directory of your sbt project, run:
+sh
+sbt package
+Submit Your Job to Dataproc:
+
+Use the gcloud command to submit your job to the Dataproc cluster:
+sh
+gcloud dataproc jobs submit spark --cluster your-cluster-name --class PageRank --jars target/s
